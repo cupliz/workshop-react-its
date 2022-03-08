@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { Modal, Button, Form, Table } from 'react-bootstrap'
-import { IoTrashOutline } from 'react-icons/io5';
+import { IoPencilOutline, IoTrashOutline } from 'react-icons/io5';
 // import { mahasiswa2 } from './Coba';
 
 export default function Form1() {
-  // [{ nama: 'budi', birthDate: '20/20/202' }]
-  const [mahasiswa, setMahasiswa] = useState([]);
+  const [mahasiswa, setMahasiswa] = useState([
+    { nama: 'budi', birthDate: '2001-03-02', gender: 'l', jurusan: 'matematika' }
+  ]);
 
   const [show, setShow] = useState(false);
+  const [edit, setEdit] = useState(null);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleSubmit = (e) => {
@@ -18,6 +20,7 @@ export default function Form1() {
       gender: e.target.gender.value,
       jurusan: e.target.jurusan.value,
     }
+    console.log(detail)
     const newMahasiswa = [...mahasiswa]
     newMahasiswa.push(detail)
     setShow(false)
@@ -25,12 +28,17 @@ export default function Form1() {
   }
 
   const handleDelete = (index) => {
-    console.log(index)
+    console.log('hapus', index)
     const newMahasiswa = [...mahasiswa]
     newMahasiswa.splice(index, 1)
     setMahasiswa(newMahasiswa)
   }
-  console.log('render mahasiswa', mahasiswa)
+  const handleEdit = (index) => {
+    setShow(true)
+    setEdit(index)
+  }
+
+  console.log('render mahasiswa', mahasiswa[edit])
   return (
     <div>
       <h1>Form Mahasiswa Baru</h1>
@@ -45,11 +53,11 @@ export default function Form1() {
           <Modal.Body>
             <div>
               <Form.Label htmlFor="nama">Nama</Form.Label>
-              <Form.Control type="text" id="nama" name="nama" />
+              <Form.Control type="text" id="nama" name="nama" value={mahasiswa[edit]?.nama} />
             </div>
             <div>
               <Form.Label htmlFor="birthDate">Tanggal Lahir</Form.Label>
-              <Form.Control type="date" id="birthDate" name="birthDate" />
+              <Form.Control type="date" id="birthDate" name="birthDate" value={mahasiswa[edit]?.birthDate} />
             </div>
             <div>
               <Form.Label htmlFor="gender">Gender</Form.Label>
@@ -67,7 +75,7 @@ export default function Form1() {
             </div>
             <div>
               <Form.Label htmlFor="gender">Jurusan</Form.Label>
-              <Form.Select name="jurusan">
+              <Form.Select name="jurusan" value={mahasiswa[edit]?.jurusan}>
                 <option disabled>Pilih jurusan anda</option>
                 <option value="matematika">Matematika</option>
                 <option value="biologi">Biologi</option>
@@ -85,12 +93,16 @@ export default function Form1() {
           </Modal.Footer>
         </form>
       </Modal>
-      <TableMahasiswa dataMhs={mahasiswa} remove={handleDelete}/>
+      <TableMahasiswa
+        dataMhs={mahasiswa}
+        remove={handleDelete}
+        edit={handleEdit}
+      />
     </div>
   )
 }
 
-const TableMahasiswa = ({ dataMhs = [], remove }) => {
+const TableMahasiswa = ({ dataMhs = [], remove, edit }) => {
   return (
     <div className='mt-4'>
       <h1>Table Mahasiswa</h1>
@@ -118,6 +130,12 @@ const TableMahasiswa = ({ dataMhs = [], remove }) => {
                   className='btn btn-danger'
                   onClick={() => remove(index)} >
                   <IoTrashOutline />
+                </button>
+                &nbsp;
+                <button
+                  className='btn btn-success'
+                  onClick={() => edit(index)} >
+                  <IoPencilOutline />
                 </button>
               </td>
             </tr>)
