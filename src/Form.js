@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Modal, Button, Form } from 'react-bootstrap'
+import { Modal, Button, Form, Table } from 'react-bootstrap'
+import { IoTrashOutline } from 'react-icons/io5';
 // import { mahasiswa2 } from './Coba';
 
 export default function Form1() {
@@ -13,7 +14,9 @@ export default function Form1() {
     e.preventDefault()
     const detail = {
       nama: e.target.nama.value,
-      birthDate: e.target.birthDate.value
+      birthDate: e.target.birthDate.value,
+      gender: e.target.gender.value,
+      jurusan: e.target.jurusan.value,
     }
     const newMahasiswa = [...mahasiswa]
     newMahasiswa.push(detail)
@@ -41,6 +44,29 @@ export default function Form1() {
               <Form.Label htmlFor="birthDate">Tanggal Lahir</Form.Label>
               <Form.Control type="date" id="birthDate" name="birthDate" />
             </div>
+            <div>
+              <Form.Label htmlFor="gender">Gender</Form.Label>
+              <Form.Check
+                type="radio"
+                id="gender"
+                name="gender"
+                label="Laki-laki"
+                value="l"
+              />
+              <div className="form-check">
+                <input name="gender" type="radio" id="gender" className="form-check-input" value="p" />
+                <label title="" htmlFor="gender" className="form-check-label">Perempuan</label>
+              </div>
+            </div>
+            <div>
+              <Form.Label htmlFor="gender">Jurusan</Form.Label>
+              <Form.Select name="jurusan">
+                <option disabled>Pilih jurusan anda</option>
+                <option value="matematika">Matematika</option>
+                <option value="biologi">Biologi</option>
+                <option value="fisika">Fisika</option>
+              </Form.Select>
+            </div>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
@@ -52,22 +78,37 @@ export default function Form1() {
           </Modal.Footer>
         </form>
       </Modal>
-      <TableMahasiswa />
+      <TableMahasiswa dataMhs={mahasiswa} />
     </div>
   )
 }
 
-function TableMahasiswa({ dataMhs = [] }) {
+const TableMahasiswa = ({ dataMhs = [] }) => {
   console.log(dataMhs)
   return (
-    <div>Table Mahasiswa
-      <table>
+    <div className='mt-4'>
+      <h1>Table Mahasiswa</h1>
+      <table className="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nama</th>
+            <th>Tanggal Lahir</th>
+            <th>Gender</th>
+            <th>Jurusan</th>
+            <th></th>
+          </tr>
+        </thead>
         <tbody>
           {dataMhs.map((value, index) => {
             console.log(value)
             return (<tr key={index}>
+              <td>{index + 1}</td>
               <td>{value.nama}</td>
               <td>{value.birthDate}</td>
+              <td>{value.gender}</td>
+              <td>{value.jurusan}</td>
+              <td><button className='btn btn-danger'><IoTrashOutline /></button></td>
             </tr>)
           })}
         </tbody>
