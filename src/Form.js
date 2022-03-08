@@ -5,7 +5,7 @@ import { IoPencilOutline, IoTrashOutline } from 'react-icons/io5';
 
 export default function Form1() {
   const [mahasiswa, setMahasiswa] = useState([
-    { nama: 'budi', birthDate: '2001-03-02', gender: 'l', jurusan: 'matematika' }
+    { nama: 'Andi', birthDate: '2001-03-22', gender: 'p', jurusan: 'biologi' }
   ]);
 
   const [show, setShow] = useState(false);
@@ -22,9 +22,14 @@ export default function Form1() {
     }
     console.log(detail)
     const newMahasiswa = [...mahasiswa]
-    newMahasiswa.push(detail)
-    setShow(false)
-    setMahasiswa(newMahasiswa)
+    if (edit) {
+      // update
+    } else {
+      newMahasiswa.push(detail)
+      setShow(false)
+      setMahasiswa(newMahasiswa)
+    }
+
   }
 
   const handleDelete = (index) => {
@@ -37,8 +42,17 @@ export default function Form1() {
     setShow(true)
     setEdit(index)
   }
+  const handleInput = (e) => {
+    console.log(edit, e.target.name)
+    if (edit > -1) {
+      const newMahasiswa = [...mahasiswa]
+      newMahasiswa[edit][e.target.name] = e.target.value
+      console.log(newMahasiswa)
+      setMahasiswa(newMahasiswa)
+    }
+  }
 
-  console.log('render mahasiswa', mahasiswa[edit])
+  // console.log('render mahasiswa', mahasiswa[edit])
   return (
     <div>
       <h1>Form Mahasiswa Baru</h1>
@@ -53,11 +67,11 @@ export default function Form1() {
           <Modal.Body>
             <div>
               <Form.Label htmlFor="nama">Nama</Form.Label>
-              <Form.Control type="text" id="nama" name="nama" value={mahasiswa[edit]?.nama} />
+              <Form.Control type="text" id="nama" name="nama" value={mahasiswa[edit]?.nama} onChange={handleInput} />
             </div>
             <div>
               <Form.Label htmlFor="birthDate">Tanggal Lahir</Form.Label>
-              <Form.Control type="date" id="birthDate" name="birthDate" value={mahasiswa[edit]?.birthDate} />
+              <Form.Control type="date" id="birthDate" name="birthDate" value={mahasiswa[edit]?.birthDate} onChange={handleInput} />
             </div>
             <div>
               <Form.Label htmlFor="gender">Gender</Form.Label>
@@ -67,15 +81,17 @@ export default function Form1() {
                 name="gender"
                 label="Laki-laki"
                 value="l"
+                checked={mahasiswa[edit]?.gender === 'l'}
+                onChange={handleInput}
               />
               <div className="form-check">
-                <input name="gender" type="radio" id="gender" className="form-check-input" value="p" />
+                <input name="gender" type="radio" id="gender" className="form-check-input" value="p" checked={mahasiswa[edit]?.gender === 'p'} onChange={handleInput} />
                 <label title="" htmlFor="gender" className="form-check-label">Perempuan</label>
               </div>
             </div>
             <div>
               <Form.Label htmlFor="gender">Jurusan</Form.Label>
-              <Form.Select name="jurusan" value={mahasiswa[edit]?.jurusan}>
+              <Form.Select name="jurusan" value={mahasiswa[edit]?.jurusan} onChange={handleInput}>
                 <option disabled>Pilih jurusan anda</option>
                 <option value="matematika">Matematika</option>
                 <option value="biologi">Biologi</option>
