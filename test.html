@@ -1,0 +1,129 @@
+<script>
+  const biodata = {
+    nama: 'budi',
+    alamat: {
+      jalan: 'Jl. Teknik Kimia',
+      kelurahan: 'Keputih',
+      kecamatan: 'Sukolilo',
+      kota: 'Surabaya',
+      provinsi: 'Jawa Timur'
+    },
+    birthDate: '2001/02/20',
+    cekUmur: (dateString) => {
+      var today = new Date()
+      var birthDate = new Date(dateString)
+      console.log(birthDate)
+      var age = today.getFullYear() - birthDate.getFullYear()
+      var m = today.getMonth() - birthDate.getMonth()
+      var d = today.getDate() < birthDate.getDate()
+      if (m < 0 || (m === 0 && d)) {
+        age--
+      }
+      return age
+    }
+  }
+  biodata.vaksin = true
+  const mahasiswa = ['budi', 'andi', 'hilmi']
+  const fulladdress = Object.keys(biodata.alamat).map((key) => {
+    return biodata.alamat[key]
+  })
+  mahasiswa.push('anita')
+  mahasiswa.splice(1, 0, 'anto')
+  mahasiswa.splice(3, 2)
+  mahasiswa.splice(2, 1, 'wildan')
+  mahasiswa[2] = 'jaka'
+  mahasiswa[5] = 'primus'
+  delete biodata.nama
+
+  // console.log('nama mahasiswa', mahasiswa[0])
+  // console.log('semua mahasiswa', mahasiswa.join(','))
+  // console.log(biodata.cekUmur(biodata['birthDate']))
+  // console.log(fulladdress.join(', '))
+
+  console.log(mahasiswa)
+  // // deconstruction / destructure
+  // const { nama, ...data } = biodata
+  // const copyBiodata = { ...biodata }
+  // const copyBiodata2 = biodata
+  // biodata.umur = 17
+  // console.log(copyBiodata, copyBiodata2, biodata)
+
+  // let arr = [3, 5, 1];
+  // const max = Math.max(...arr)
+  // console.log(arr, max)
+  // const angka1 = prompt('angka 1')
+  // const angka2 = prompt('angka 2')
+  let c = 10
+  function penjumlahan(a, b) {
+    // console.log(a + b)
+    return parseInt(a) + parseInt(b) + c
+  }
+  console.log(penjumlahan(1, 2), c)
+  // function pengurangan(a,b){
+  //   return a-b
+  // }
+  // const hasil = penjumlahan(angka1, angka2)
+  // const hasil2 = pengurangan(hasil+10, hasil)
+  // console.log(hasil2)
+</script>
+<script>
+  // // jenis2 perulangan
+  // // for
+  // // for of
+  // // for in
+  // // do while
+  // // .map
+  // // .forEach
+  // // .reduce
+  // // .filter
+  // const mahasiswa = ['budi', 'ANDI', 'helmi']
+  // // for (let i = 0; i < mahasiswa.length; i++) {
+  // //   const data = mahasiswa[i]
+  // //   console.log(data)
+  // // }
+  // function test(asd) {}
+  // const test2 = () => {} // arrow function
+  // // mahasiswa.map((nama) => {
+  // //   console.log(nama)
+  // // })
+  // const newMahasiswa = mahasiswa.filter((nama) => {
+  //   if (nama.toLowerCase().startsWith('a')) {
+  //     return nama
+  //   }
+  // })
+  // console.log(newMahasiswa)
+</script>
+
+<script>
+  // console.log('Hello World!')
+  // let var1 = 'Selamat Pagi,'
+  // const var_1 = 'Hallo Bro' // snake case
+  // var akuVariable = 'Piye kabare' // camel case
+  // let nama = 'budi'
+  // let umur = 20
+  // let sudahMakan = true
+  // var1 = 'selamat malam'
+  // // var2 = 'Halo' ctrl+/
+  // akuVariable = 'Kabarku apik'
+  // // console.log(typeof umur)
+  // // // let isBoss = confirm('Are you the boss?')
+  // // // alert('alert')
+  // // // console.log(isBoss)
+  // // if (age >= 18) {
+  // //   console.log('saya sudah cukup umur')
+  // // } else {
+  // //   console.log('saya masih dibawah umur')
+  // // }
+  // let alamat = null
+  // let pekerjaan = prompt('Apakah pekerjaan anda?', null)
+  // let age = prompt('How old are you?', 20)
+  // console.log(typeof age)
+  // if (alamat!==null) {
+  //   // age = parseInt(age) + 20
+  //   alert(`mahasiswa diatas ${age} tahun`)
+  // } else if (pekerjaan == 'pns') {
+  //   console.log('saya seorang', pekerjaan)
+  // } else {
+  //   console.log('pekerjaan tidak diketahui')
+  // }
+</script>
