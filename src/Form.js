@@ -23,6 +23,13 @@ export default function Form1() {
     setShow(false)
     setMahasiswa(newMahasiswa)
   }
+
+  const handleDelete = (index) => {
+    console.log(index)
+    const newMahasiswa = [...mahasiswa]
+    newMahasiswa.splice(index, 1)
+    setMahasiswa(newMahasiswa)
+  }
   console.log('render mahasiswa', mahasiswa)
   return (
     <div>
@@ -78,13 +85,12 @@ export default function Form1() {
           </Modal.Footer>
         </form>
       </Modal>
-      <TableMahasiswa dataMhs={mahasiswa} />
+      <TableMahasiswa dataMhs={mahasiswa} remove={handleDelete}/>
     </div>
   )
 }
 
-const TableMahasiswa = ({ dataMhs = [] }) => {
-  console.log(dataMhs)
+const TableMahasiswa = ({ dataMhs = [], remove }) => {
   return (
     <div className='mt-4'>
       <h1>Table Mahasiswa</h1>
@@ -101,14 +107,19 @@ const TableMahasiswa = ({ dataMhs = [] }) => {
         </thead>
         <tbody>
           {dataMhs.map((value, index) => {
-            console.log(value)
             return (<tr key={index}>
               <td>{index + 1}</td>
               <td>{value.nama}</td>
               <td>{value.birthDate}</td>
               <td>{value.gender}</td>
               <td>{value.jurusan}</td>
-              <td><button className='btn btn-danger'><IoTrashOutline /></button></td>
+              <td>
+                <button
+                  className='btn btn-danger'
+                  onClick={() => remove(index)} >
+                  <IoTrashOutline />
+                </button>
+              </td>
             </tr>)
           })}
         </tbody>
