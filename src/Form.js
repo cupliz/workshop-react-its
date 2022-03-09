@@ -7,11 +7,9 @@ export default function Form1() {
   const [mahasiswa, setMahasiswa] = useState([
     { nama: 'Andi', birthDate: '2001-03-22', gender: 'p', jurusan: 'biologi' }
   ]);
-
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState(null);
   const [newData, setNewData] = useState(null);
-  // const [editData, setEditData] = useState(null);
   const handleClose = () => setShow(false);
   const handleTambah = () => {
     setShow(true)
@@ -24,6 +22,17 @@ export default function Form1() {
       birthDate: e.target.birthDate.value,
       gender: e.target.gender.value,
       jurusan: e.target.jurusan.value,
+    }
+    const newMahasiswa = [...mahasiswa]
+    if (edit !== null) {
+      // update
+      console.log('update')
+    } else {
+      console.log('add')
+      newMahasiswa.push(detail)
+      setShow(false)
+      setMahasiswa(newMahasiswa)
+      setNewData(null)
     }
   }
 
@@ -38,14 +47,11 @@ export default function Form1() {
     setEdit(index)
   }
   const handleInput = (e) => {
-    console.log(edit, e.target.name, e.target.value)
     if (edit == null) {
-      console.log('tambah')
       const addNewData = { ...newData }
       addNewData[e.target.name] = e.target.value
       setNewData(addNewData)
     } else {
-      console.log('update')
       const newMahasiswa = [...mahasiswa]
       newMahasiswa[edit][e.target.name] = e.target.value
       setMahasiswa(newMahasiswa)
@@ -80,19 +86,19 @@ export default function Form1() {
               <Form.Label htmlFor="gender">Gender</Form.Label>
               <Form.Check
                 type="radio"
-                id="gender"
+                id="gender-l"
                 name="gender"
                 label="Laki-laki"
                 value="l"
-                checked={mahasiswa[edit]?.gender === 'l' || newData?.gender}
+                checked={(mahasiswa[edit]?.gender || newData?.gender) === 'l'}
                 onChange={handleInput}
               />
               <div className="form-check">
-                <input name="gender" type="radio" id="gender" className="form-check-input" value="p"
-                  checked={mahasiswa[edit]?.gender === 'p' || newData?.gender}
+                <input name="gender" type="radio" id="gender-p" className="form-check-input" value="p"
+                  checked={(mahasiswa[edit]?.gender || newData?.gender) === 'p'}
                   onChange={handleInput}
                 />
-                <label title="" htmlFor="gender" className="form-check-label">Perempuan</label>
+                <label title="" htmlFor="gender-p" className="form-check-label">Perempuan</label>
               </div>
             </div>
             <div>
