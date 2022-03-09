@@ -1,0 +1,45 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "Bagus"
+  },
+  "cars": [
+    {
+      "id": 1,
+      "name": "toyota"
+    },
+    {
+      "id": 2,
+      "name": "lexus"
+    },
+    {
+      "id": 3,
+      "name": "mitsubishi"
+    },
+    {
+      "name": "suzuki",
+      "id": 4
+    },
+    {
+      "name": "honda",
+      "id": 5
+    },
+    {
+      "name": "kia",
+      "id": 6
+    }
+  ]
+}
