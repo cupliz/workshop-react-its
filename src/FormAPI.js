@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import Button from './components/Button'
 
 export default function FormAPI() {
   const [data, setdata] = useState([])
@@ -40,36 +41,43 @@ export default function FormAPI() {
     e.preventDefault()
     console.log('index edit', edit, data[edit].id)
     axios.patch(`http://localhost:3001/cars/${data[edit].id}`, { name: e.target.car.value })
-      .then(() => { 
-        getData() 
+      .then(() => {
+        getData()
         setedit(null)
       })
   }
   useEffect(() => {
     getData()
   }, [])
+
   return (
-    <div className='container'>
-      FormAPI
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="car" />
-        <button type="submit">Save</button>
+    <div className='container mx-auto px-4 space-y-4 my-4'>
+      <div className='w-full text-center text-blue-500 text-xl indent-3'>Form API</div>
+      <form onSubmit={handleSubmit} className="p-5 grid grid-cols-2 gap-4 border-2 rounded-lg">
+        <input type="text" className="form-input" name="car" placeholder='Nama Bus' />
+        <select name="jurusan" id="" className='="form-select'>
+          <option value="surabaya">Surabaya</option>
+          <option value="jakarta">Jakarta</option>
+        </select>
+        <Button type="submit" text="Add New" tahu="goreng" tempe="bacem"/>
       </form>
-      {data.map((car, i) => {
-        return <li key={i} className='row'>
-          {edit === i ?
-            <form className='col' onSubmit={(event)=>handleEdit(event)}>
-              <input name="car" defaultValue={car.name} />
-              <button>Save</button>
-            </form>
-            : car.name
-          }
-          <div className='col row'>
-            <div className="col" onClick={() => setedit(i)}>edit</div>
-            <div className="col" onClick={() => handleDelete(car.id)}>delete</div>
+      <div className='grid sm:grid-cols-2 md:grid-cols-3 gap-3 items-center'>
+        {data.map((car, i) => {
+          return <div key={i} className='bg-white border-2 rounded-lg overflow-hidden p-4'>
+            {edit === i ?
+              <form className='w-full flex space-x-2' onSubmit={(event) => handleEdit(event)}>
+                <input className="form-input w-2/3" name="car" defaultValue={car.name} />
+                <button className='bg-blue-500 text-white px-2 rounded-lg w-1/3'>Save</button>
+              </form>
+              : car.name
+            }
+            <div className='flex py-4 gap-4 text-center'>
+              <div className="bg-green-500 text-white px-2 rounded-lg w-1/2" onClick={() => setedit(i === edit ? null : i)}>edit</div>
+              <div className="bg-red-500 text-white px-2 rounded-lg w-1/2" onClick={() => handleDelete(car.id)}>delete</div>
+            </div>
           </div>
-        </li>
-      })}
+        })}
+      </div>
     </div >
   )
 }

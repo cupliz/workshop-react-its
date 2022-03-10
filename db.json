@@ -16,30 +16,5 @@
   "profile": {
     "name": "Bagus"
   },
-  "cars": [
-    {
-      "name": "hondasawdawd",
-      "id": 2
-    },
-    {
-      "name": "kia sadewa",
-      "id": 3
-    },
-    {
-      "name": "lambow",
-      "id": 4
-    },
-    {
-      "name": "land rover",
-      "id": 5
-    },
-    {
-      "name": "jaguar",
-      "id": 6
-    },
-    {
-      "name": "audi",
-      "id": 7
-    }
-  ]
+  "cars": []
 }
