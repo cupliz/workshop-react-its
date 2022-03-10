@@ -8,6 +8,7 @@ import {
 import Home from './Home';
 import FormAPI from './FormAPI';
 import Form from './Form';
+import Sepatu from './Sepatu';
 import reportWebVitals from './reportWebVitals';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
@@ -19,6 +20,7 @@ ReactDOM.render(
         <Route exact path="/" element={<Home />} />
         <Route path="/bus" element={<FormAPI />} />
         <Route path="/form" element={<Form />} />
+        <Route path="/sepatu" element={<Sepatu />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
