@@ -16,5 +16,22 @@
   "profile": {
     "name": "Bagus"
   },
-  "cars": []
+  "cars": [
+    {
+      "name": "malam",
+      "id": 1
+    },
+    {
+      "name": "pagi",
+      "id": 2
+    },
+    {
+      "name": "senja utama",
+      "id": 3
+    },
+    {
+      "name": "Esse in alias est p",
+      "id": 4
+    }
+  ]
 }
